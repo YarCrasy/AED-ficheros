@@ -1,0 +1,31 @@
+[
+  {
+    "nombre": "Pedro",
+    "apellido": "Jiménez Morales",
+    "edad": "21",
+    "matricula": "2024006"
+  },
+  {
+    "nombre": "Laura",
+    "apellido": "Díaz Romero"
+    "edad": "20",
+    "matricula": "2024007"
+  },
+  {
+    "nombre": "Miguel",
+    "apellido": "Álvarez Castro",
+    "edad": 22,
+    "matricula": "2024008"
+  },
+  {
+    "nombre": "Carmen"
+    "apellido": "Navarro Ortiz",
+    "edad": "19",
+    "matricula": "2024009",
+  },
+  {
+    "nombre": "Javier",
+    "apellido": "Ramos Iglesias",
+    "edad": "21",
+    "matricula": "2024010"
+]

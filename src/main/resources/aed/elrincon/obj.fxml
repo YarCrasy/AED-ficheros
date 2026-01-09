@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="aed.elrincon.controller.ObjectController"
+            prefHeight="700.0" prefWidth="1000.0">
+    
+    <top>
+        <VBox spacing="10" style="-fx-background-color: #2C3E50;">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            
+            <Label text="Gestor de Estudiantes - Archivos de Objetos" 
+                   style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;"/>
+            
+            <HBox spacing="15" alignment="CENTER_LEFT">
+                
+                <Button fx:id="btnBackToLauncher" text="Volver al Launcher Hub" 
+                        onAction="#handleBackToLauncher"
+                        style="-fx-background-color: #95A5A6; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20;"/>
+                <Button fx:id="btnViewObj" text="Ver Archivo .obj" 
+                        onAction="#handleViewObj"
+                        style="-fx-background-color: #E67E22; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20;"/>
+                
+                <Label fx:id="lblStatus" text="Ningún archivo cargado" 
+                       style="-fx-text-fill: #ECF0F1; -fx-font-size: 12px;"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox spacing="10">
+            <padding>
+                <Insets top="10" right="20" bottom="10" left="20"/>
+            </padding>
+            
+            <Label text="Estudiantes Cargados:" 
+                   style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+            
+            <TableView fx:id="tableStudents" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colNombre" text="Nombre" prefWidth="200"/>
+                    <TableColumn fx:id="colApellido" text="Apellido" prefWidth="200"/>
+                    <TableColumn fx:id="colEdad" text="Edad" prefWidth="100"/>
+                    <TableColumn fx:id="colMatricula" text="Matrícula" prefWidth="150"/>
+                </columns>
+                <columnResizePolicy>
+                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                </columnResizePolicy>
+            </TableView>
+            
+            <HBox spacing="10" alignment="CENTER">
+                <Button fx:id="btnAdd" text="Agregar Estudiante" 
+                        onAction="#handleAddStudent"
+                        style="-fx-background-color: #2ECC71; -fx-text-fill: white; -fx-font-size: 13px; -fx-padding: 8 15;"/>
+                
+                <Button fx:id="btnEdit" text="Editar Estudiante" 
+                        onAction="#handleEditStudent"
+                        style="-fx-background-color: #F39C12; -fx-text-fill: white; -fx-font-size: 13px; -fx-padding: 8 15;"/>
+                
+                <Button fx:id="btnDelete" text="Eliminar Estudiante" 
+                        onAction="#handleDeleteStudent"
+                        style="-fx-background-color: #E74C3C; -fx-text-fill: white; -fx-font-size: 13px; -fx-padding: 8 15;"/>
+            </HBox>
+        </VBox>
+    </center>
+    <bottom>
+        <HBox spacing="10" alignment="CENTER_LEFT" 
+              style="-fx-background-color: #34495E; -fx-padding: 10;">
+            <Label fx:id="lblFileInfo" text="Archivo: Ninguno" 
+                   style="-fx-text-fill: white; -fx-font-size: 12px;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="lblRecordCount" text="Registros: 0" 
+                   style="-fx-text-fill: white; -fx-font-size: 12px;"/>
+        </HBox>
+    </bottom>
+</BorderPane>
+

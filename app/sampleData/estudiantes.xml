@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<students>
+    <student>
+        <nombre>Roberto</nombre>
+        <apellido>Herrera Gil</apellido>
+        <edad>20</edad>
+        <matricula>2024011</matricula>
+    </student>
+    <student>
+        <nombre>Elena</nombre>
+        <apellido>Moreno Vega</apellido>
+        <edad>21</edad>
+        <matricula>2024012</matricula>
+    </student>
+    <student>
+        <nombre>David</nombre>
+        <apellido>Vargas Medina</apellido>
+        <edad>19</edad>
+        <matricula>2024013</matricula>
+    </student>
+    <student>
+        <nombre>Isabel</nombre>
+        <apellido>Castro Prieto</apellido>
+        <edad>22</edad>
+        <matricula>2024014</matricula>
+    </student>
+    <student>
+        <nombre>Sergio</nombre>
+        <apellido>Ortiz Delgado</apellido>
+        <edad>20</edad>
+        <matricula>2024015</matricula>
+    </student>
+</students>

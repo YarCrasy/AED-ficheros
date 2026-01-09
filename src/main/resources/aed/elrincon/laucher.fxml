@@ -8,7 +8,7 @@
 <!-- Hub para elegir el módulo -->
 <VBox alignment="CENTER" spacing="20.0"
       xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="aed.elrincon.LauncherHubController"
+      fx:controller="aed.elrincon.controller.LauncherHubController"
       >
 
    <padding>
