@@ -1,0 +1,40 @@
+{
+  "estudiantes": [
+    {
+      "nombre": null,
+      "apellido": "López",
+      "edad": "21",
+      "matricula": "MAT100"
+    },
+    {
+      "nombre": "Juan",
+      "apellido": null,
+      "edad": "invalid",
+      "matricula": "MAT101"
+    },
+    {
+      "nombre": "Juan",
+      "apellido": "García",
+      "edad": "",
+      "matricula": "MAT102"
+    },
+    {
+      "nombre": "Juan",
+      "apellido": "García",
+      "edad": "150",
+      "matricula": ""
+    },
+    {
+      "nombre": "",
+      "apellido": "",
+      "edad": "",
+      "matricula": ""
+    },
+    {
+      "nombre": "Juan",
+      "apellido": "García",
+      "edad": "-5",
+      "matricula": "MAT103"
+    }
+  ]
+}

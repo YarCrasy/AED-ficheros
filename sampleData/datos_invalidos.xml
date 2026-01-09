@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<estudiantes>
+    <estudiante>
+        <nombre></nombre>
+        <apellido>López</apellido>
+        <edad>21</edad>
+        <matricula>MAT100</matricula>
+    </estudiante>
+    <estudiante>
+        <nombre>Juan</nombre>
+        <apellido></apellido>
+        <edad>invalid</edad>
+        <matricula>MAT101</matricula>
+    </estudiante>
+    <estudiante>
+        <nombre>Juan</nombre>
+        <apellido>García</apellido>
+        <edad></edad>
+        <matricula>MAT102</matricula>
+    </estudiante>
+    <estudiante>
+        <nombre>Juan</nombre>
+        <apellido>García</apellido>
+        <edad>150</edad>
+        <matricula></matricula>
+    </estudiante>
+    <estudiante>
+        <nombre></nombre>
+        <apellido></apellido>
+        <edad></edad>
+        <matricula></matricula>
+    </estudiante>
+    <estudiante>
+        <nombre>Juan</nombre>
+        <apellido>García</apellido>
+        <edad>-5</edad>
+        <matricula>MAT103</matricula>
+    </estudiante>
+</estudiantes>

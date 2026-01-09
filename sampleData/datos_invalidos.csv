@@ -1,0 +1,8 @@
+nombre,apellido,edad,matricula
+,López,21,MAT100
+Juan,,invalid,MAT101
+Juan,García,,MAT102
+Juan,García,abc,
+,,,
+Juan,García,150,MAT103
+Juan,García,-5,MAT104

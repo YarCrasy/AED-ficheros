@@ -1,0 +1,52 @@
+{
+  "estudiantes": [
+    {
+      "nombre": "Juan",
+      "apellido": "García",
+      "edad": "20",
+      "matricula": "MAT001"
+    },
+    {
+      "nombre": "María",
+      "apellido": "López",
+      "edad": "21",
+      "matricula": "MAT002"
+    },
+    {
+      "nombre": "Carlos",
+      "apellido": "Rodríguez",
+      "edad": "19",
+      "matricula": "MAT003"
+    },
+    {
+      "nombre": "Ana",
+      "apellido": "Martínez",
+      "edad": "22",
+      "matricula": "MAT004"
+    },
+    {
+      "nombre": "Luis",
+      "apellido": "Pérez",
+      "edad": "20",
+      "matricula": "MAT005"
+    },
+    {
+      "nombre": "Elena",
+      "apellido": "Sánchez",
+      "edad": "21",
+      "matricula": "MAT006"
+    },
+    {
+      "nombre": "Diego",
+      "apellido": "Gómez",
+      "edad": "19",
+      "matricula": "MAT007"
+    },
+    {
+      "nombre": "Paula",
+      "apellido": "Fernández",
+      "edad": "20",
+      "matricula": "MAT008"
+    }
+  ]
+}
