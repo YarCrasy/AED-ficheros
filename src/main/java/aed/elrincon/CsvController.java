@@ -1,7 +1,6 @@
 package aed.elrincon;
 
-import aed.elrincon.Student;
-import aed.elrincon.App;
+import aed.elrincon.model.Student;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

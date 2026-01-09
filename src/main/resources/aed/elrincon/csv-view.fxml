@@ -8,7 +8,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" spacing="15" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aed.elrincon.controller.CsvController">
+<VBox alignment="CENTER" spacing="15"
+      xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="aed.elrincon.CsvController">
     <padding>
         <Insets bottom="20" left="20" right="20" top="20"/>
     </padding>
