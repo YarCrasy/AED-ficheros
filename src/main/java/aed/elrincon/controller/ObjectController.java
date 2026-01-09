@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,7 +45,7 @@ public class ObjectController {
     private Label lblRecordCount;
 
     private ObservableList<Student> studentList = FXCollections.observableArrayList();
-    private String exportedObjPath = "app/exportedObj";
+    private String exportedObjPath = "sampleData";
 
     @FXML
     public void initialize() {
@@ -58,17 +56,6 @@ public class ObjectController {
         colMatricula.setCellValueFactory(new PropertyValueFactory<>("matricula"));
 
         tableStudents.setItems(studentList);
-
-        // Crear directorio de exportación si no existe
-        createExportDirectory();
-    }
-
-    private void createExportDirectory() {
-        try {
-            Files.createDirectories(Paths.get(exportedObjPath));
-        } catch (IOException e) {
-            showAlert("Error", "No se pudo crear el directorio de exportación", Alert.AlertType.ERROR);
-        }
     }
 
     @FXML
@@ -79,7 +66,12 @@ public class ObjectController {
                 new FileChooser.ExtensionFilter("Object Files", "*.obj"),
                 new FileChooser.ExtensionFilter("All Files", "*.*")
         );
-        fileChooser.setInitialDirectory(new File(exportedObjPath));
+        
+        // Solo establecer el directorio inicial si existe
+        File initialDir = new File(exportedObjPath);
+        if (initialDir.exists() && initialDir.isDirectory()) {
+            fileChooser.setInitialDirectory(initialDir);
+        }
 
         File file = fileChooser.showOpenDialog(tableStudents.getScene().getWindow());
         if (file != null) {
