@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" spacing="15" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aed.elrincon.controller.CsvController">
+    <padding>
+        <Insets bottom="20" left="20" right="20" top="20"/>
+    </padding>
+
+    <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="GESTIÓN DE ESTUDIANTES - CSV"/>
+
+    <TableView fx:id="tableView" prefHeight="400.0" prefWidth="800.0">
+        <columns>
+            <TableColumn fx:id="colNombre" prefWidth="200.0" text="Nombre"/>
+            <TableColumn fx:id="colApellido" prefWidth="200.0" text="Apellido"/>
+            <TableColumn fx:id="colEdad" prefWidth="100.0" text="Edad"/>
+            <TableColumn fx:id="colMatricula" prefWidth="150.0" text="Matrícula"/>
+        </columns>
+    </TableView>
+
+    <HBox alignment="CENTER" spacing="10">
+        <Button fx:id="buttonAnadir" mnemonicParsing="false" style="-fx-font-size: 14px; -fx-pref-width: 120px;" text="➕ Añadir"/>
+        <Button fx:id="buttonEditar" mnemonicParsing="false" style="-fx-font-size: 14px; -fx-pref-width: 120px;" text="✏️ Editar"/>
+        <Button fx:id="buttonEliminar" mnemonicParsing="false" style="-fx-font-size: 14px; -fx-pref-width: 120px;" text="🗑️ Eliminar"/>
+    </HBox>
+
+    <HBox alignment="CENTER" spacing="10">
+        <Button fx:id="buttonGuardar" mnemonicParsing="false" style="-fx-font-size: 14px; -fx-pref-width: 150px;" text="💾 Guardar CSV"/>
+        <Button fx:id="buttonCargar" mnemonicParsing="false" style="-fx-font-size: 14px; -fx-pref-width: 150px;" text="📂 Cargar CSV"/>
+    </HBox>
+
+    <HBox alignment="CENTER" spacing="10">
+        <Button fx:id="buttonVolver" mnemonicParsing="false" style="-fx-font-size: 14px; -fx-pref-width: 200px;" text="⬅️ Volver al Menú"/>
+    </HBox>
+</VBox>
