@@ -5,59 +5,81 @@
 <?import javafx.scene.layout.*?>
 
 <BorderPane xmlns="http://javafx.com/javafx/21"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="aed.elrincon.controller.JSONController">
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="aed.elrincon.controller.JSONController"
+            prefHeight="600" prefWidth="800">
 
-   <!-- FORMULARIO -->
-   <top>
-      <GridPane hgap="10" vgap="10">
-         <padding>
-            <Insets top="10" right="10" bottom="10" left="10"/>
-         </padding>
-         
-         <Label text="Nombre"/>
-         <TextField fx:id="txtNombre"/>
-         
-         <Label text="Apellido"/>
-         <TextField fx:id="txtApellido"/>
-         
-         <Label text="Edad"/>
-         <TextField fx:id="txtEdad"/>
-         
-         <Label text="Matrícula"/>
-         <TextField fx:id="txtMatricula"/>
-         
-         <HBox spacing="10">
-            <Button text="Agregar" onAction="#agregarStudent"/>
-            <Button text="Modificar" onAction="#modificarStudent"/>
-            <Button text="Eliminar" onAction="#eliminarStudent"/>
-            <Button text="Limpiar" onAction="#limpiarCampos"/>
-         </HBox>
-      </GridPane>
-   </top>
+    <!-- FORMULARIO -->
+    <top>
+        <GridPane hgap="10" vgap="10">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
 
-   <!-- TABLA -->
-   <center>
-      <TableView fx:id="studentsTable">
-         <columns>
-            <TableColumn fx:id="colNombre" text="Nombre"/>
-            <TableColumn fx:id="colApellido" text="Apellido"/>
-            <TableColumn fx:id="colEdad" text="Edad"/>
-            <TableColumn fx:id="colMatricula" text="Matrícula"/>
-         </columns>
-      </TableView>
-   </center>
+            <!-- Fila 0 -->
+            <Label text="Nombre" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+            <TextField fx:id="txtNombre" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
-   <!-- JSON + ESTADO -->
-   <bottom>
-      <VBox spacing="5">
-         <padding>
-            <Insets top="10" right="10" bottom="10" left="10"/>
-         </padding>
-         <Label text="Contenido del archivo JSON"/>
-         <TextArea fx:id="txtJsonContent" prefRowCount="6" editable="false"/>
-         <Label fx:id="lblStatus" text="Estado del sistema"/>
-      </VBox>
-   </bottom>
+            <!-- Fila 1 -->
+            <Label text="Apellido" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+            <TextField fx:id="txtApellido" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+            <!-- Fila 2 -->
+            <Label text="Edad" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+            <TextField fx:id="txtEdad" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+            <!-- Fila 3 -->
+            <Label text="Matrícula" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+            <TextField fx:id="txtMatricula" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+            <!-- Fila 4: Botones de CRUD -->
+            <HBox spacing="10" GridPane.rowIndex="4" GridPane.columnIndex="1">
+                <Button text="Agregar" onAction="#agregarStudent" prefWidth="80"/>
+                <Button text="Modificar" onAction="#modificarStudent" prefWidth="80"/>
+                <Button text="Eliminar" onAction="#eliminarStudent" prefWidth="80"/>
+                <Button text="Limpiar" onAction="#limpiarCampos" prefWidth="80"/>
+            </HBox>
+        </GridPane>
+    </top>
+
+    <!-- TABLA -->
+    <center>
+        <TableView fx:id="studentsTable" onMouseClicked="#seleccionarStudent">
+            <columns>
+                <TableColumn fx:id="colNombre" text="Nombre" prefWidth="150"/>
+                <TableColumn fx:id="colApellido" text="Apellido" prefWidth="150"/>
+                <TableColumn fx:id="colEdad" text="Edad" prefWidth="80"/>
+                <TableColumn fx:id="colMatricula" text="Matrícula" prefWidth="120"/>
+            </columns>
+        </TableView>
+    </center>
+
+    <!-- JSON + ESTADO + BOTONES -->
+    <bottom>
+        <VBox spacing="10">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+
+            <!-- Botones principales -->
+            <HBox spacing="10">
+                <Button text="📂 Cargar JSON" onAction="#cargarJSON" prefWidth="120"
+                        style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold;"/>
+                <Button text="💾 Guardar JSON" onAction="#guardarJSON" prefWidth="120"
+                        style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-weight: bold;"/>
+                <Button text="↩ Volver" onAction="#volver" prefWidth="100"
+                        style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold;"/>
+            </HBox>
+
+            <!-- Vista JSON -->
+            <Label text="Contenido JSON:"/>
+            <TextArea fx:id="txtJsonContent" prefRowCount="5" editable="false"
+                      style="-fx-font-family: 'Monospaced'; -fx-font-size: 12px;"/>
+
+            <!-- Estado -->
+            <Label fx:id="lblStatus" text="Listo para usar"
+                   style="-fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+        </VBox>
+    </bottom>
 
 </BorderPane>
