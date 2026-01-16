@@ -81,6 +81,32 @@ public class XMLController {
     }
 
     @FXML
+    private void modificarStudent() {
+        Student selected = tableStudents.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            showAlert("Sin selección", "Selecciona un estudiante para modificar", Alert.AlertType.INFORMATION);
+            return;
+        }
+
+        if (!validateInputs()) {
+            return;
+        }
+
+        String newMatricula = txtMatricula.getText().trim();
+        if (!selected.getMatricula().equals(newMatricula) && matriculaExists(newMatricula)) {
+            showAlert("Matrícula duplicada", "Ya existe un estudiante con esa matrícula", Alert.AlertType.WARNING);
+            return;
+        }
+
+        selected.setNombre(txtNombre.getText().trim());
+        selected.setApellido(txtApellido.getText().trim());
+        selected.setEdad(txtEdad.getText().trim());
+        selected.setMatricula(newMatricula);
+        tableStudents.refresh();
+        clearInputs();
+    }
+
+    @FXML
     private void deleteStudent() {
         Student selected = tableStudents.getSelectionModel().getSelectedItem();
         if (selected == null) {
@@ -146,6 +172,7 @@ public class XMLController {
         return students.stream().anyMatch(s -> s.getMatricula().equalsIgnoreCase(matricula));
     }
 
+    @FXML
     private void clearInputs() {
         txtNombre.clear();
         txtApellido.clear();

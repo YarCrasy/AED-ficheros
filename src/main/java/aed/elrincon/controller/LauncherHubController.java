@@ -5,7 +5,6 @@ import java.io.IOException;
 import aed.elrincon.App;
 import javafx.fxml.FXML;
 
-
 public class LauncherHubController {
 
     @FXML

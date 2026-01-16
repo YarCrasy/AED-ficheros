@@ -6,7 +6,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/17"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="aed.elrincon.controller.JSONController">
+            fx:controller="aed.elrincon.controller.XMLController">
 
     <!-- FORMULARIO -->
     <top>
@@ -27,17 +27,17 @@
             <TextField fx:id="txtMatricula" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
 
             <HBox spacing="10" GridPane.rowIndex="4" GridPane.columnIndex="1">
-                <Button fx:id="btnAgregar" text="Agregar" onAction="#agregarStudent"/>
+                <Button fx:id="btnAgregar" text="Agregar" onAction="#addStudent"/>
                 <Button fx:id="btnModificar" text="Modificar" onAction="#modificarStudent"/>
-                <Button fx:id="btnEliminar" text="Eliminar" onAction="#eliminarStudent"/>
-                <Button fx:id="btnLimpiar" text="Limpiar" onAction="#limpiarCampos"/>
+                <Button fx:id="btnEliminar" text="Eliminar" onAction="#deleteStudent"/>
+                <Button fx:id="btnLimpiar" text="Limpiar" onAction="#clearInputs"/>
             </HBox>
         </GridPane>
     </top>
 
     <!-- TABLA -->
     <center>
-        <TableView fx:id="studentsTable">
+        <TableView fx:id="tableStudents">
             <columns>
                 <TableColumn fx:id="colNombre" text="Nombre"/>
                 <TableColumn fx:id="colApellido" text="Apellido"/>
@@ -53,9 +53,11 @@
             <padding>
                 <Insets top="10" right="10" bottom="10" left="10"/>
             </padding>
-            <Label text="Contenido del archivo JSON"/>
-            <TextArea fx:id="txtJsonContent" prefRowCount="6"/>
-            <Label fx:id="lblStatus" text="Estado del sistema"/>
+            <HBox spacing="10">
+                <Button text="Cargar XML" onAction="#loadXML"/>
+                <Button text="Guardar XML" onAction="#saveXML"/>
+            </HBox>
+            <Label text="Estado del sistema"/>
         </VBox>
     </bottom>
 
