@@ -1,55 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
 
-<BorderPane xmlns="http://javafx.com/javafx/17"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="aed.elrincon.controller.JSONController">
+<!-- Hub para elegir el módulo -->
+<VBox alignment="CENTER" spacing="20.0"
+      xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="aed.elrincon.controller.LauncherHubController"
+      >
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
 
-   <!-- FORMULARIO -->
-   <top>
-      <GridPane hgap="10" vgap="10" padding="10">
-         <Label text="Nombre"/>
-         <TextField fx:id="txtNombre"/>
+   <children>
+      <Label text="Launcher Hub" />
+      <Button text="CSV" onAction="#toCSV"/>
+      <Button text="JSON" onAction="#toJSON"/>
+      <Button text="XML" onAction="#toXML" disable="true"/>
+      <Button text="OBJ" onAction="#toOBJ"/>
 
-         <Label text="Apellido"/>
-         <TextField fx:id="txtApellido"/>
-
-         <Label text="Edad"/>
-         <TextField fx:id="txtEdad"/>
-
-         <Label text="Matrícula"/>
-         <TextField fx:id="txtMatricula"/>
-
-         <HBox spacing="10">
-            <Button fx:id="btnAgregar" text="Agregar" onAction="#agregarStudent"/>
-            <Button fx:id="btnModificar" text="Modificar" onAction="#modificarStudent"/>
-            <Button fx:id="btnEliminar" text="Eliminar" onAction="#eliminarStudent"/>
-            <Button fx:id="btnLimpiar" text="Limpiar" onAction="#limpiarCampos"/>
-         </HBox>
-      </GridPane>
-   </top>
-
-   <!-- TABLA -->
-   <center>
-      <TableView fx:id="studentsTable">
-         <columns>
-            <TableColumn fx:id="colNombre" text="Nombre"/>
-            <TableColumn fx:id="colApellido" text="Apellido"/>
-            <TableColumn fx:id="colEdad" text="Edad"/>
-            <TableColumn fx:id="colMatricula" text="Matrícula"/>
-         </columns>
-      </TableView>
-   </center>
-
-   <!-- JSON + ESTADO -->
-   <bottom>
-      <VBox spacing="5" padding="10">
-         <Label text="Contenido del archivo JSON"/>
-         <TextArea fx:id="txtJsonContent" prefRowCount="6"/>
-         <Label fx:id="lblStatus" text="Estado del sistema"/>
-      </VBox>
-   </bottom>
-
-</BorderPane>
+   </children>
+</VBox>
