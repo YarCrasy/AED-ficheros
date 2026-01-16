@@ -34,6 +34,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 [Files]
 Source: "C:\Users\lingc\Documents\JavaProjects\AED-ficheros\target\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\lingc\Documents\JavaProjects\AED-ficheros\target\lib\*"; DestDir: "{app}\lib"; Flags: ignoreversion recursesubdirs
+Source: "C:\Users\lingc\Documents\JavaProjects\AED-ficheros\sampleData\*"; DestDir: "{app}\sampleData"; Flags: ignoreversion recursesubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
