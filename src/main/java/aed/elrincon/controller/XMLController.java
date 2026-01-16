@@ -1,9 +1,11 @@
 package aed.elrincon.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import aed.elrincon.App;
 import aed.elrincon.model.Student;
 import aed.elrincon.model.StudentList;
 import jakarta.xml.bind.JAXBContext;
@@ -60,12 +62,12 @@ public class XMLController {
 
     @FXML
     private void addStudent() {
-        if (!validateInputs()) {
-            return;
-        }
+        if (!validateInputs()) return;
 
         if (matriculaExists(txtMatricula.getText().trim())) {
-            showAlert("Matrícula duplicada", "Ya existe un estudiante con esa matrícula", Alert.AlertType.WARNING);
+            showAlert("Matrícula duplicada",
+                    "Ya existe un estudiante con esa matrícula",
+                    Alert.AlertType.WARNING);
             return;
         }
 
@@ -84,17 +86,19 @@ public class XMLController {
     private void modificarStudent() {
         Student selected = tableStudents.getSelectionModel().getSelectedItem();
         if (selected == null) {
-            showAlert("Sin selección", "Selecciona un estudiante para modificar", Alert.AlertType.INFORMATION);
+            showAlert("Sin selección",
+                    "Selecciona un estudiante para modificar",
+                    Alert.AlertType.INFORMATION);
             return;
         }
 
-        if (!validateInputs()) {
-            return;
-        }
+        if (!validateInputs()) return;
 
         String newMatricula = txtMatricula.getText().trim();
         if (!selected.getMatricula().equals(newMatricula) && matriculaExists(newMatricula)) {
-            showAlert("Matrícula duplicada", "Ya existe un estudiante con esa matrícula", Alert.AlertType.WARNING);
+            showAlert("Matrícula duplicada",
+                    "Ya existe un estudiante con esa matrícula",
+                    Alert.AlertType.WARNING);
             return;
         }
 
@@ -102,6 +106,7 @@ public class XMLController {
         selected.setApellido(txtApellido.getText().trim());
         selected.setEdad(txtEdad.getText().trim());
         selected.setMatricula(newMatricula);
+
         tableStudents.refresh();
         clearInputs();
     }
@@ -110,20 +115,23 @@ public class XMLController {
     private void deleteStudent() {
         Student selected = tableStudents.getSelectionModel().getSelectedItem();
         if (selected == null) {
-            showAlert("Sin selección", "Selecciona un estudiante para eliminar", Alert.AlertType.INFORMATION);
+            showAlert("Sin selección",
+                    "Selecciona un estudiante para eliminar",
+                    Alert.AlertType.INFORMATION);
             return;
         }
 
-        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION, "¿Eliminar al estudiante seleccionado?", ButtonType.OK, ButtonType.CANCEL);
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION,
+                "¿Eliminar al estudiante seleccionado?",
+                ButtonType.OK, ButtonType.CANCEL);
+
         confirm.showAndWait().filter(ButtonType.OK::equals).ifPresent(btn -> students.remove(selected));
     }
 
     @FXML
     private void saveXML() {
         File file = fileChooser.showSaveDialog(tableStudents.getScene().getWindow());
-        if (file == null) {
-            return;
-        }
+        if (file == null) return;
 
         try {
             JAXBContext context = JAXBContext.newInstance(StudentList.class);
@@ -132,29 +140,49 @@ public class XMLController {
 
             StudentList wrapper = new StudentList(new ArrayList<>(students));
             marshaller.marshal(wrapper, file);
-            showAlert("Éxito", "Archivo guardado en: " + file.getAbsolutePath(), Alert.AlertType.INFORMATION);
+
+            showAlert("Éxito",
+                    "Archivo guardado en: " + file.getAbsolutePath(),
+                    Alert.AlertType.INFORMATION);
+
         } catch (Exception ex) {
-            showAlert("Error", "No se pudo guardar el archivo XML: " + ex.getMessage(), Alert.AlertType.ERROR);
+            showAlert("Error",
+                    "No se pudo guardar el archivo XML: " + ex.getMessage(),
+                    Alert.AlertType.ERROR);
         }
     }
 
     @FXML
     private void loadXML() {
         File file = fileChooser.showOpenDialog(tableStudents.getScene().getWindow());
-        if (file == null) {
-            return;
-        }
+        if (file == null) return;
 
         try {
             JAXBContext context = JAXBContext.newInstance(StudentList.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
+
             StudentList wrapper = (StudentList) unmarshaller.unmarshal(file);
-            List<Student> loaded = wrapper != null && wrapper.getStudents() != null ? wrapper.getStudents() : List.of();
+
+            List<Student> loaded = wrapper != null && wrapper.getStudents() != null
+                    ? wrapper.getStudents()
+                    : List.of();
+
             students.setAll(loaded);
-            showAlert("Éxito", "Archivo cargado: " + file.getAbsolutePath(), Alert.AlertType.INFORMATION);
+
+            showAlert("Éxito",
+                    "Archivo cargado: " + file.getAbsolutePath(),
+                    Alert.AlertType.INFORMATION);
+
         } catch (Exception ex) {
-            showAlert("Error", "No se pudo cargar el archivo XML: " + ex.getMessage(), Alert.AlertType.ERROR);
+            showAlert("Error",
+                    "No se pudo cargar el archivo XML: " + ex.getMessage(),
+                    Alert.AlertType.ERROR);
         }
+    }
+
+    @FXML
+    public void volverToLauncher() throws IOException {
+        App.setRoot("launcher");
     }
 
     private boolean validateInputs() {
@@ -162,7 +190,9 @@ public class XMLController {
                 txtApellido.getText().trim().isEmpty() ||
                 txtEdad.getText().trim().isEmpty() ||
                 txtMatricula.getText().trim().isEmpty()) {
-            showAlert("Campos vacíos", "Completa todos los campos", Alert.AlertType.WARNING);
+            showAlert("Campos vacíos",
+                    "Completa todos los campos",
+                    Alert.AlertType.WARNING);
             return false;
         }
         return true;

@@ -56,6 +56,7 @@
             <HBox spacing="10">
                 <Button text="Cargar XML" onAction="#loadXML"/>
                 <Button text="Guardar XML" onAction="#saveXML"/>
+                <Button text="Volver" onAction="#volverToLauncher"/>
             </HBox>
             <Label text="Estado del sistema"/>
         </VBox>
