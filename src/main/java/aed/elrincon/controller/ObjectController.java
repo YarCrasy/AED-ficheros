@@ -36,7 +36,6 @@ public class ObjectController {
     @FXML
     private TableColumn<Student, String> colMatricula;
 
-    
     @FXML
     private Label lblStatus;
     @FXML
@@ -44,8 +43,8 @@ public class ObjectController {
     @FXML
     private Label lblRecordCount;
 
-    private ObservableList<Student> studentList = FXCollections.observableArrayList();
-    private String exportedObjPath = "sampleData";
+    private final ObservableList<Student> studentList = FXCollections.observableArrayList();
+    private final String exportedObjPath = "sampleData";
 
     @FXML
     public void initialize() {
@@ -59,7 +58,7 @@ public class ObjectController {
     }
 
     @FXML
-    private void handleViewObj() {
+    public void handleViewObj() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Abrir Archivo .obj");
         fileChooser.getExtensionFilters().addAll(
@@ -96,12 +95,12 @@ public class ObjectController {
 
         } catch (Exception e) {
             showAlert("Error", "Error al cargar archivo .obj: " + e.getMessage(), Alert.AlertType.ERROR);
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 
     @FXML
-    private void handleAddStudent() {
+    public void handleAddStudent() {
         Dialog<Student> dialog = createStudentDialog(null);
         Optional<Student> result = dialog.showAndWait();
 
@@ -112,7 +111,7 @@ public class ObjectController {
     }
 
     @FXML
-    private void handleEditStudent() {
+    public void handleEditStudent() {
         Student selected = tableStudents.getSelectionModel().getSelectedItem();
         if (selected == null) {
             showAlert("Advertencia", "Seleccione un estudiante para editar", Alert.AlertType.WARNING);
@@ -132,7 +131,7 @@ public class ObjectController {
     }
 
     @FXML
-    private void handleDeleteStudent() {
+    public void handleDeleteStudent() {
         Student selected = tableStudents.getSelectionModel().getSelectedItem();
         if (selected == null) {
             showAlert("Advertencia", "Seleccione un estudiante para eliminar", Alert.AlertType.WARNING);
@@ -201,7 +200,7 @@ public class ObjectController {
     }
 
     @FXML
-    private void handleBackToLauncher() throws IOException {
+    public void handleBackToLauncher() throws IOException {
         aed.elrincon.App.setRoot("laucher");
     }
 }
