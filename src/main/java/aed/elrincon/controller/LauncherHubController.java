@@ -10,6 +10,6 @@ public class LauncherHubController {
 
     @FXML
     private void switchToSecondary() throws IOException {
-        App.setRoot("obj");
+        App.setRoot("csv-view");
     }
 }
