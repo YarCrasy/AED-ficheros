@@ -201,6 +201,6 @@ public class ObjectController {
 
     @FXML
     public void handleBackToLauncher() throws IOException {
-        aed.elrincon.App.setRoot("laucher");
+        aed.elrincon.App.setRoot("launcher");
     }
 }

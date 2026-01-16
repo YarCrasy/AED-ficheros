@@ -18,7 +18,7 @@
       <Label text="Launcher Hub" />
       <Button text="CSV" onAction="#toCSV"/>
       <Button text="JSON" onAction="#toJSON"/>
-      <Button text="XML" onAction="#toXML" disable="true"/>
+      <Button text="XML" onAction="#toXML"/>
       <Button text="OBJ" onAction="#toOBJ"/>
 
    </children>

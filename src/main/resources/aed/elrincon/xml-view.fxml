@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -9,7 +10,10 @@
 
     <!-- FORMULARIO -->
     <top>
-        <GridPane hgap="10" vgap="10" padding="10">
+        <GridPane hgap="10" vgap="10">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
             <Label text="Nombre" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
             <TextField fx:id="txtNombre" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
@@ -45,7 +49,10 @@
 
     <!-- JSON + ESTADO -->
     <bottom>
-        <VBox spacing="5" padding="10">
+        <VBox spacing="5">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
             <Label text="Contenido del archivo JSON"/>
             <TextArea fx:id="txtJsonContent" prefRowCount="6"/>
             <Label fx:id="lblStatus" text="Estado del sistema"/>

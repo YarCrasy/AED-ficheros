@@ -5,6 +5,7 @@ module aed.elrincon {
     requires com.opencsv;
     requires com.google.gson;
     requires jakarta.xml.bind;
+    requires org.glassfish.jaxb.runtime;
 
     opens aed.elrincon to javafx.fxml;
     opens aed.elrincon.controller to javafx.fxml;

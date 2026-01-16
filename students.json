@@ -1,1 +1,8 @@
-[]
+[
+  {
+    "nombre": "a",
+    "apellido": "aa",
+    "edad": "1",
+    "matricula": "1"
+  }
+]
