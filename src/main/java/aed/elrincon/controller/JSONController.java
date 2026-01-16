@@ -1,32 +1,18 @@
 package aed.elrincon.controller;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonSyntaxException;
-import com.google.gson.reflect.TypeToken;
-
 import aed.elrincon.model.Student;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class JSONController {
 
@@ -58,16 +44,7 @@ public class JSONController {
     private TextField txtMatricula;
 
     @FXML
-    private Button btnAgregar;
-
-    @FXML
-    private Button btnModificar;
-
-    @FXML
-    private Button btnEliminar;
-
-    @FXML
-    private TextArea txtJsonContent;
+    private TextArea txtJsonContent;  // Lo añadí para evitar error
 
     @FXML
     private Label lblStatus;
@@ -75,14 +52,14 @@ public class JSONController {
     private ObservableList<Student> studentsList;
     private final String JSON_FILE = "students.json";
     private Gson gson;
-    private Student studentSeleccionado;
+    private Student selectedStudent;
 
     @FXML
     public void initialize() {
-        gson = new GsonBuilder().setPrettyPrinting().create();
+        gson = new Gson();
         studentsList = FXCollections.observableArrayList();
 
-        // Configurar columnas de la tabla
+        // Configurar tabla
         colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         colApellido.setCellValueFactory(new PropertyValueFactory<>("apellido"));
         colEdad.setCellValueFactory(new PropertyValueFactory<>("edad"));
@@ -90,120 +67,104 @@ public class JSONController {
 
         studentsTable.setItems(studentsList);
 
-        // Cargar datos al iniciar
-        cargarDatos();
+        // Cargar datos
+        loadData();
 
-        // Listener para selección de fila
+        // Selección en tabla
         studentsTable.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> seleccionarStudent(newValue));
-
-        // Deshabilitar botones inicialmente
-        btnModificar.setDisable(true);
-        btnEliminar.setDisable(true);
+            (obs, oldSelection, newSelection) -> selectStudent(newSelection)
+        );
     }
 
-    private void cargarDatos() {
+    private void loadData() {
         try {
             File file = new File(JSON_FILE);
-            if (!file.exists()) {
-                // Crear archivo vacío si no existe
-                guardarDatos();
-                return;
-            }
-
-            String json = new String(Files.readAllBytes(Paths.get(JSON_FILE)));
-            Type listType = new TypeToken<ArrayList<Student>>() {
-            }.getType();
-            List<Student> students = gson.fromJson(json, listType);
-
-            if (students != null) {
-                studentsList.setAll(students);
-                mostrarJSON();
-                actualizarStatus("Datos cargados correctamente. Total: " + students.size());
+            if (file.exists()) {
+                String json = new String(Files.readAllBytes(Paths.get(JSON_FILE)));
+                List<Student> students = gson.fromJson(json, new TypeToken<List<Student>>(){}.getType());
+                if (students != null) {
+                    studentsList.setAll(students);
+                }
+                setStatus("Datos cargados: " + studentsList.size() + " estudiantes");
+                txtJsonContent.setText(json);  // Mostrar contenido JSON en el TextArea
             } else {
-                // Si el archivo está vacío o corrupto, inicializar lista vacía
-                studentsList.clear();
-                mostrarJSON();
-                actualizarStatus("Archivo vacío o corrupto. Lista inicializada vacía.");
+                setStatus("Archivo creado: " + JSON_FILE);
+                saveData();
             }
-        } catch (IOException e) {
-            mostrarError("Error al cargar el archivo JSON: " + e.getMessage());
-        } catch (JsonSyntaxException e) {
-            mostrarError("Error en el formato del archivo JSON: " + e.getMessage());
+        } catch (Exception e) {
+            setStatus("Error al cargar: " + e.getMessage());
         }
     }
 
-    private void guardarDatos() {
+    private void saveData() {
         try (FileWriter writer = new FileWriter(JSON_FILE)) {
             gson.toJson(new ArrayList<>(studentsList), writer);
-            mostrarJSON();
-            actualizarStatus("Datos guardados correctamente en " + JSON_FILE);
+            setStatus("Guardado: " + studentsList.size() + " estudiantes");
+            txtJsonContent.setText(gson.toJson(new ArrayList<>(studentsList))); // Actualizar contenido JSON
         } catch (IOException e) {
-            mostrarError("Error al guardar el archivo JSON: " + e.getMessage());
+            setStatus("Error al guardar: " + e.getMessage());
         }
     }
 
     @FXML
-    public void agregarStudent() {
-        if (validarCampos()) {
-            // Verificar si la matrícula ya existe
+    private void agregarStudent() {
+        if (validateFields()) {
             String matricula = txtMatricula.getText().trim();
-            if (matriculaExiste(matricula)) {
-                mostrarError("La matrícula " + matricula + " ya existe.");
-                return;
+
+            // Verificar matrícula única
+            for (Student s : studentsList) {
+                if (s.getMatricula().equals(matricula)) {
+                    setStatus("Error: Matrícula ya existe");
+                    return;
+                }
             }
 
             Student student = new Student(
-                    txtNombre.getText().trim(),
-                    txtApellido.getText().trim(),
-                    txtEdad.getText().trim(),
-                    matricula);
+                txtNombre.getText().trim(),
+                txtApellido.getText().trim(),
+                txtEdad.getText().trim(),
+                matricula
+            );
 
             studentsList.add(student);
-            guardarDatos();
+            saveData();
             limpiarCampos();
         }
     }
 
     @FXML
-    public void modificarStudent() {
-        if (studentSeleccionado != null && validarCampos()) {
+    private void modificarStudent() {
+        if (selectedStudent != null && validateFields()) {
             String nuevaMatricula = txtMatricula.getText().trim();
 
-            // Verificar si la nueva matrícula ya existe (y no es la del estudiante actual)
-            if (!studentSeleccionado.getMatricula().equals(nuevaMatricula) && matriculaExiste(nuevaMatricula)) {
-                mostrarError("La matrícula " + nuevaMatricula + " ya existe.");
-                return;
+            // Verificar matrícula única (excepto para el estudiante actual)
+            for (Student s : studentsList) {
+                if (s != selectedStudent && s.getMatricula().equals(nuevaMatricula)) {
+                    setStatus("Error: Matrícula ya existe");
+                    return;
+                }
             }
 
-            studentSeleccionado.setNombre(txtNombre.getText().trim());
-            studentSeleccionado.setApellido(txtApellido.getText().trim());
-            studentSeleccionado.setEdad(txtEdad.getText().trim());
-            studentSeleccionado.setMatricula(nuevaMatricula);
+            selectedStudent.setNombre(txtNombre.getText().trim());
+            selectedStudent.setApellido(txtApellido.getText().trim());
+            selectedStudent.setEdad(txtEdad.getText().trim());
+            selectedStudent.setMatricula(nuevaMatricula);
 
             studentsTable.refresh();
-            guardarDatos();
+            saveData();
             limpiarCampos();
-            deshabilitarBotonesCRUD();
+            selectedStudent = null;
         }
     }
 
     @FXML
-    public void eliminarStudent() {
-        if (studentSeleccionado != null) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Confirmar eliminación");
-            alert.setHeaderText("¿Está seguro de eliminar este estudiante?");
-            alert.setContentText("Estudiante: " + studentSeleccionado.getNombre() + " " +
-                    studentSeleccionado.getApellido() +
-                    "\nMatrícula: " + studentSeleccionado.getMatricula());
-
-            if (alert.showAndWait().get() == ButtonType.OK) {
-                studentsList.remove(studentSeleccionado);
-                guardarDatos();
-                limpiarCampos();
-                deshabilitarBotonesCRUD();
-            }
+    private void eliminarStudent() {
+        if (selectedStudent != null) {
+            studentsList.remove(selectedStudent);
+            saveData();
+            limpiarCampos();
+            selectedStudent = null;
+            setStatus("Estudiante eliminado");
         }
     }
 
@@ -214,103 +175,51 @@ public class JSONController {
         txtEdad.clear();
         txtMatricula.clear();
         studentsTable.getSelectionModel().clearSelection();
-        studentSeleccionado = null;
-        deshabilitarBotonesCRUD();
-        btnAgregar.setDisable(false);
+        selectedStudent = null;
+        setStatus("Campos limpiados");
     }
 
-    @FXML
-    private void mostrarJSON() {
-        try {
-            File file = new File(JSON_FILE);
-            if (file.exists() && file.length() > 0) {
-                String json = new String(Files.readAllBytes(Paths.get(JSON_FILE)));
-                txtJsonContent.setText(json);
-            } else {
-                txtJsonContent.setText("[]");
-            }
-        } catch (IOException e) {
-            txtJsonContent.setText("Error al leer el archivo JSON: " + e.getMessage());
-        }
-    }
-
-    @FXML
-    public void recargarDatos() {
-        cargarDatos();
-    }
-
-    private void seleccionarStudent(Student student) {
+    private void selectStudent(Student student) {
         if (student != null) {
-            studentSeleccionado = student;
+            selectedStudent = student;
             txtNombre.setText(student.getNombre());
             txtApellido.setText(student.getApellido());
             txtEdad.setText(student.getEdad());
             txtMatricula.setText(student.getMatricula());
-
-            // Habilitar botones de modificar/eliminar
-            btnModificar.setDisable(false);
-            btnEliminar.setDisable(false);
-            btnAgregar.setDisable(true);
+            setStatus("Seleccionado: " + student.getNombre());
         }
     }
 
-    private void deshabilitarBotonesCRUD() {
-        btnModificar.setDisable(true);
-        btnEliminar.setDisable(true);
-        btnAgregar.setDisable(false);
-    }
-
-    private boolean matriculaExiste(String matricula) {
-        return studentsList.stream()
-                .anyMatch(student -> student.getMatricula().equals(matricula));
-    }
-
-    private boolean validarCampos() {
-        // Validar que no haya campos vacíos
+    private boolean validateFields() {
         if (txtNombre.getText().trim().isEmpty() ||
-                txtApellido.getText().trim().isEmpty() ||
-                txtEdad.getText().trim().isEmpty() ||
-                txtMatricula.getText().trim().isEmpty()) {
-            mostrarError("Todos los campos son obligatorios.");
+            txtApellido.getText().trim().isEmpty() ||
+            txtEdad.getText().trim().isEmpty() ||
+            txtMatricula.getText().trim().isEmpty()) {
+            setStatus("Error: Todos los campos son obligatorios");
             return false;
         }
 
-        // Validar matrícula (solo números, longitud específica si lo deseas)
         String matricula = txtMatricula.getText().trim();
         if (!matricula.matches("\\d+")) {
-            mostrarError("La matrícula debe contener solo números.");
+            setStatus("Error: Matrícula debe contener solo números");
             return false;
         }
 
-        // Validar edad (solo números)
-        String edad = txtEdad.getText().trim();
-        if (!edad.matches("\\d+")) {
-            mostrarError("La edad debe ser un número.");
-            return false;
-        }
-
-        // Validar rango de edad
         try {
-            int edadInt = Integer.parseInt(edad);
-            if (edadInt < 0 || edadInt > 120) {
-                mostrarError("La edad debe estar entre 0 y 120 años.");
+            int edad = Integer.parseInt(txtEdad.getText().trim());
+            if (edad < 0 || edad > 120) {
+                setStatus("Error: Edad debe ser entre 0 y 120");
                 return false;
             }
         } catch (NumberFormatException e) {
-            mostrarError("La edad debe ser un número válido.");
+            setStatus("Error: Edad debe ser un número");
             return false;
         }
 
         return true;
     }
 
-    private void mostrarError(String mensaje) {
-        lblStatus.setText("Error: " + mensaje);
-        lblStatus.setStyle("-fx-text-fill: red; -fx-font-weight: bold;");
-    }
-
-    private void actualizarStatus(String mensaje) {
-        lblStatus.setText(mensaje);
-        lblStatus.setStyle("-fx-text-fill: green; -fx-font-weight: bold;");
+    private void setStatus(String message) {
+        lblStatus.setText(message);
     }
 }

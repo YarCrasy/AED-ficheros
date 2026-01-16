@@ -14,23 +14,24 @@
          <padding>
             <Insets top="10" right="10" bottom="10" left="10"/>
          </padding>
+         
          <Label text="Nombre"/>
          <TextField fx:id="txtNombre"/>
-
+         
          <Label text="Apellido"/>
          <TextField fx:id="txtApellido"/>
-
+         
          <Label text="Edad"/>
          <TextField fx:id="txtEdad"/>
-
+         
          <Label text="Matrícula"/>
          <TextField fx:id="txtMatricula"/>
-
+         
          <HBox spacing="10">
-            <Button fx:id="btnAgregar" text="Agregar" onAction="#agregarStudent"/>
-            <Button fx:id="btnModificar" text="Modificar" onAction="#modificarStudent"/>
-            <Button fx:id="btnEliminar" text="Eliminar" onAction="#eliminarStudent"/>
-            <Button fx:id="btnLimpiar" text="Limpiar" onAction="#limpiarCampos"/>
+            <Button text="Agregar" onAction="#agregarStudent"/>
+            <Button text="Modificar" onAction="#modificarStudent"/>
+            <Button text="Eliminar" onAction="#eliminarStudent"/>
+            <Button text="Limpiar" onAction="#limpiarCampos"/>
          </HBox>
       </GridPane>
    </top>
@@ -54,7 +55,7 @@
             <Insets top="10" right="10" bottom="10" left="10"/>
          </padding>
          <Label text="Contenido del archivo JSON"/>
-         <TextArea fx:id="txtJsonContent" prefRowCount="6"/>
+         <TextArea fx:id="txtJsonContent" prefRowCount="6" editable="false"/>
          <Label fx:id="lblStatus" text="Estado del sistema"/>
       </VBox>
    </bottom>
