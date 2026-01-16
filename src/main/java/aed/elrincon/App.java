@@ -1,25 +1,25 @@
 package aed.elrincon;
 
-import java.io.IOException;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class App extends Application {
 
-    private static Scene scene;
-
     @Override
-    public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("laucher"), 1280, 720);
+    public void start(Stage stage) throws Exception {
+        FXMLLoader loader = new FXMLLoader(
+                App.class.getResource("/aed/elrincon/student.fxml")
+        );
+
+        Scene scene = new Scene(loader.load(), 1000, 600);
+        stage.setTitle("Gestión de Estudiantes - XML");
         stage.setScene(scene);
-        stage.setTitle("Ficheros Estudiantes - JavaFX");
         stage.show();
     }
 
+<<<<<<< HEAD
     public static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
@@ -29,8 +29,9 @@ public class App extends Application {
         return fxmlLoader.load();
     }
 
+=======
+>>>>>>> adriBien-v
     public static void main(String[] args) {
         launch();
     }
-
 }

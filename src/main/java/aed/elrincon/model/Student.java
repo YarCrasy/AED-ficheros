@@ -17,6 +17,10 @@ public class Student implements Serializable {
     private String matricula;
 
     public Student() {}
+<<<<<<< HEAD
+=======
+
+>>>>>>> adriBien-v
     public Student(String nombre, String apellido, String edad, String matricula) {
         this.nombre = nombre;
         this.apellido = apellido;
@@ -26,6 +30,7 @@ public class Student implements Serializable {
 
     public String getNombre() { return nombre; }
     public void setNombre(String nombre) { this.nombre = nombre; }
+<<<<<<< HEAD
 
     public String getApellido() { return apellido; }
     public void setApellido(String apellido) { this.apellido = apellido; }
@@ -33,6 +38,12 @@ public class Student implements Serializable {
     public String getEdad() { return edad; }
     public void setEdad(String edad) {  this.edad = edad; }
 
+=======
+    public String getApellido() { return apellido; }
+    public void setApellido(String apellido) { this.apellido = apellido; }
+    public String getEdad() { return edad; }
+    public void setEdad(String edad) { this.edad = edad; }
+>>>>>>> adriBien-v
     public String getMatricula() { return matricula; }
     public void setMatricula(String matricula) { this.matricula = matricula; }
 }

@@ -1,13 +1,25 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
          http://maven.apache.org/xsd/maven-4.0.0.xsd">
+=======
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+>>>>>>> adriBien-v
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>aed.elrincon</groupId>
     <artifactId>ficheros</artifactId>
+<<<<<<< HEAD
     <version>1.0-SNAPSHOT</version>
+=======
+    <version>1.2-SNAPSHOT</version>
+>>>>>>> adriBien-v
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -16,18 +28,24 @@
     </properties>
 
     <dependencies>
+<<<<<<< HEAD
+=======
+
+>>>>>>> adriBien-v
         <!-- JavaFX -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
             <version>${javafx.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
             <version>${javafx.version}</version>
         </dependency>
 
+<<<<<<< HEAD
         <!-- Dependencias de datos -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
@@ -41,6 +59,9 @@
             <version>5.12.0</version>
             <scope>compile</scope>
         </dependency>
+=======
+        <!-- JAXB API (XML) -->
+>>>>>>> adriBien-v
         <dependency>
             <groupId>jakarta.xml.bind</groupId>
             <artifactId>jakarta.xml.bind-api</artifactId>
@@ -51,6 +72,8 @@
 
     <build>
         <plugins>
+
+            <!-- Compiler -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -60,6 +83,7 @@
                 </configuration>
             </plugin>
 
+<<<<<<< HEAD
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
@@ -81,7 +105,32 @@
                         </goals>
                     </execution>
                 </executions>
+=======
+            <!-- JavaFX Run -->
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.6</version>
+                <configuration>
+                    <mainClass>aed.elrincon.App</mainClass>
+                    <options>
+                        <!-- Permite que FXML acceda a tu controlador con reflexión -->
+                        <option>--add-opens</option>
+                        <option>javafx.fxml/javafx.fxml=ALL-UNNAMED</option>
+                        <!-- Permite a JavaFX controls usar reflexión interna sin bloqueos -->
+                        <option>--add-opens</option>
+                        <option>javafx.graphics/javafx.scene=ALL-UNNAMED</option>
+                    </options>
+                </configuration>
+>>>>>>> adriBien-v
             </plugin>
+
         </plugins>
     </build>
+<<<<<<< HEAD
 </project>
+=======
+
+</project>
+
+>>>>>>> adriBien-v
