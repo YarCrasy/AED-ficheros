@@ -68,29 +68,75 @@
                 </configuration>
             </plugin>
 
+            <!-- JAR Plugin con Manifest -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <finalName>ficheros</finalName>
+                    <archive>
+                        <manifest>
+                            <mainClass>aed.elrincon.Launcher</mainClass>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <!-- Dependency Plugin para copiar dependencias a lib/ -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.6.0</version>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                            <includeScope>runtime</includeScope>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
-                <configuration>
-                    <mainClass>aed.elrincon.App</mainClass>
-                    <options>
-                        <!-- Opciones para módulos -->
-                        <option>--add-opens</option>
-                        <option>aed.elrincon/aed.elrincon=javafx.fxml</option>
-                        <option>--add-opens</option>
-                        <option>aed.elrincon/aed.elrincon.controller=javafx.fxml</option>
-                    </options>
-                </configuration>
                 <executions>
                     <execution>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
+                        <!-- Default configuration for running with: mvn clean javafx:run -->
+                        <id>default-cli</id>
+                        <configuration>
+                            <mainClass>aed.elrincon/aed.elrincon.App</mainClass>
+                            <launcher>app</launcher>
+                            <jlinkZipName>app</jlinkZipName>
+                            <jlinkImageName>app</jlinkImageName>
+                            <noManPages>true</noManPages>
+                            <stripDebug>true</stripDebug>
+                            <noHeaderFiles>true</noHeaderFiles>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
 
         </plugins>
     </build>
+
+    <distributionManagement>
+        <repository>
+            <id>internal-repo</id>
+            <url>https://repo.example.com/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>internal-snapshots</id>
+            <url>https://repo.example.com/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>
