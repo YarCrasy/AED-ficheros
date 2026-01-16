@@ -9,7 +9,7 @@ module aed.elrincon {
     opens aed.elrincon to javafx.fxml;
     opens aed.elrincon.controller to javafx.fxml;
     opens aed.elrincon.model to com.google.gson, java.xml.bind;
-    
+
     exports aed.elrincon;
     exports aed.elrincon.controller;
     exports aed.elrincon.model;
