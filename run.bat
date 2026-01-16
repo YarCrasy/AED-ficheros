@@ -1,11 +1,11 @@
 @echo off
 echo ========================================
-echo  Gestor de Estudiantes - Compilacion
+echo  Gestor de Ficheros - Compilacion
 echo ========================================
 echo.
 
 echo Compilando proyecto...
-call mvn clean compile
+call mvn clean package -DskipTests
 
 if %ERRORLEVEL% NEQ 0 (
     echo.
@@ -20,6 +20,8 @@ echo  Compilacion exitosa!
 echo ========================================
 echo.
 echo Ejecutando aplicacion...
-call mvn javafx:run
+pushd target
+java -cp "ficheros.jar;lib/*" aed.elrincon.Launcher
+popd
 
 pause

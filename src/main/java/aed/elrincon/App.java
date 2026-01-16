@@ -19,7 +19,7 @@ public class App extends Application {
         );
 
         scene = new Scene(loader.load(), 1280, 720);
-        stage.setTitle("Gestión de Estudiantes - XML");
+        stage.setTitle("Gestión de Estudiantes - El Rincón");
         stage.setScene(scene);
         stage.show();
     }

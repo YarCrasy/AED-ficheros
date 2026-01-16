@@ -23,9 +23,12 @@
                 <Button fx:id="btnBackToLauncher" text="Volver al Launcher Hub" 
                         onAction="#handleBackToLauncher"
                         style="-fx-background-color: #95A5A6; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20;"/>
-                <Button fx:id="btnViewObj" text="Ver Archivo .obj" 
+                <Button fx:id="btnViewObj" text="Cargar Archivo .obj" 
                         onAction="#handleViewObj"
                         style="-fx-background-color: #E67E22; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20;"/>
+                <Button fx:id="btnSaveObj" text="Guardar Archivo .obj" 
+                        onAction="#handleSaveObj"
+                        style="-fx-background-color: #27AE60; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20;"/>
                 
                 <Label fx:id="lblStatus" text="Ningún archivo cargado" 
                        style="-fx-text-fill: #ECF0F1; -fx-font-size: 12px;"/>
