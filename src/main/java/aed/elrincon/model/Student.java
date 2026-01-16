@@ -35,5 +35,20 @@ public class Student implements Serializable {
 
     public String getMatricula() { return matricula; }
     public void setMatricula(String matricula) { this.matricula = matricula; }
+
+    private boolean isBlank(String value) { return value == null || value.trim().isEmpty(); }
+    public boolean isValid() { return isValid(null); }
+    public boolean isValid(java.util.Set<String> existingMatriculas) {
+        if (isBlank(nombre) || isBlank(apellido) || isBlank(edad) || isBlank(matricula)) return false;
+
+        if (existingMatriculas != null && existingMatriculas.contains(matricula.trim())) return false;
+
+        try {
+            int age = Integer.parseInt(edad.trim());
+            return age >= 0 && age <= 200;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
 }
 
