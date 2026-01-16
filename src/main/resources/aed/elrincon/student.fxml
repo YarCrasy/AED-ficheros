@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/13"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="aed.elrincon.view.StudentView">
+
+    <center>
+        <TableView fx:id="tableStudents" prefHeight="400" prefWidth="800">
+            <columns>
+                <TableColumn fx:id="colNombre" text="Nombre" prefWidth="200"/>
+                <TableColumn fx:id="colApellido" text="Apellido" prefWidth="200"/>
+                <TableColumn fx:id="colEdad" text="Edad" prefWidth="100"/>
+                <TableColumn fx:id="colMatricula" text="Matrícula" prefWidth="200"/>
+            </columns>
+        </TableView>
+    </center>
+
+    <bottom>
+        <VBox spacing="10">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+
+            <HBox spacing="10">
+                <TextField fx:id="txtNombre" promptText="Nombre" />
+                <TextField fx:id="txtApellido" promptText="Apellido" />
+                <TextField fx:id="txtEdad" promptText="Edad" />
+                <TextField fx:id="txtMatricula" promptText="Matrícula" />
+            </HBox>
+
+            <HBox spacing="10">
+                <Button text="Añadir" onAction="#addStudent"/>
+                <Button text="Eliminar" onAction="#deleteStudent"/>
+                <Button text="Guardar XML" onAction="#saveXML"/>
+                <Button text="Cargar XML" onAction="#loadXML"/>
+            </HBox>
+        </VBox>
+    </bottom>
+
+</BorderPane>
